@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpine — Restaurant &amp; Hotel Landing Page Template</title>
+<style>
+  /* ═══════════════════════════════════════════
+     ALPINE — Elegant Restaurant/Hotel Landing
+     Author: Diego Farango · DILOmcfly
+     License: MIT
+     ═══════════════════════════════════════════ */
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg:         #faf8f5;
+    --bg-warm:    #f3ede4;
+    --bg-dark:    #1a1814;
+    --surface:    #fff;
+    --border:     #e8e0d4;
+    --border-lt:  #f0ebe3;
+    --text:       #1a1814;
+    --text-mid:   #5c564a;
+    --text-dim:   #8a8378;
+    --accent:     #8b6914;
+    --accent-lt:  #c4a24e;
+    --accent-bg:  rgba(139,105,20,0.06);
+    --cream:      #f5f0e8;
+    --radius:     8px;
+    --serif:      'Playfair Display', 'Georgia', 'Times New Roman', serif;
+    --sans:       'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; transition: color .2s; }
+  a:hover { color: var(--accent-lt); }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 100px 0; }
+
+  /* ── NAV ────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 0;
+    background: rgba(250,248,245,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-lt);
+    transition: background .3s, box-shadow .3s;
+  }
+  nav.scrolled { background: rgba(250,248,245,0.97); box-shadow: 0 2px 20px rgba(0,0,0,0.04); }
+  nav .container { display: flex; align-items: center; justify-content: space-between; }
+  .logo {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
+  .logo em { font-style: italic; color: var(--accent); font-weight: 500; }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--text-mid);
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color .2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--accent);
+    transition: width .3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    padding: 10px 24px;
+    background: var(--bg-dark);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .3s, transform .2s;
+  }
+  .nav-cta:hover { background: var(--accent); transform: translateY(-1px); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--text); border-radius: 2px; transition: .3s; }
+
+  /* ── HERO ───────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(26,24,20,0.2) 0%, rgba(26,24,20,0.55) 100%),
+      linear-gradient(135deg, #3d3225 0%, #5c4a32 30%, #2a2420 70%, #1a1814 100%);
+    background-size: cover;
+    background-position: center;
+  }
+  /* Placeholder pattern to simulate an image */
+  .hero-bg::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 100% 50% at 50% 100%, rgba(139,105,20,0.15), transparent),
+      repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px),
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px);
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    color: #fff;
+    max-width: 800px;
+    padding: 0 24px;
+  }
+  .hero-tagline {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: var(--accent-lt);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+  }
+  .hero h1 em { font-style: italic; font-weight: 500; }
+  .hero-desc {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 480px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+  }
+  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-gold {
+    padding: 14px 36px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: background .3s, transform .2s;
+  }
+  .btn-gold:hover { background: var(--accent-lt); transform: translateY(-2px); }
+  .btn-outline {
+    padding: 14px 36px;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all .3s;
+  }
+  .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    color: rgba(255,255,255,0.4);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    animation: fadeDown 2s ease-in-out infinite;
+  }
+  .scroll-indicator::after {
+    content: '';
+    width: 1px; height: 40px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.4), transparent);
+  }
+  @keyframes fadeDown { 0%,100%{ opacity:.4; transform:translateX(-50%) translateY(0); } 50%{ opacity:.8; transform:translateX(-50%) translateY(8px); } }
+
+  /* ── ABOUT ─────────────────────────────────── */
+  .about { background: var(--bg); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-image {
+    aspect-ratio: 4/5;
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+  }
+  .about-image-inner {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #d4c5a0 0%, #a08c5c 50%, #6b5c3a 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-image-inner span {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.5);
+    font-style: italic;
+    letter-spacing: 2px;
+  }
+  /* Decorative frame */
+  .about-image::before {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .about-content {}
+  .section-eyebrow {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .section-heading {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+  .section-heading em { font-style: italic; font-weight: 500; }
+  .about-content p {
+    color: var(--text-mid);
+    font-size: 1rem;
+    line-height: 1.9;
+    margin-bottom: 16px;
+  }
+  .about-signature {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-top: 24px;
+  }
+
+  /* ── DIVIDER ───────────────────────────────── */
+  .divider {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    padding: 20px 0;
+    color: var(--accent-lt);
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    width: 60px; height: 1px;
+    background: var(--border);
+  }
+
+  /* ── MENU / SERVICES ───────────────────────── */
+  .menu { background: var(--cream); }
+  .menu-header { text-align: center; margin-bottom: 60px; }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .menu-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
+    border: 1px solid var(--border-lt);
+  }
+  .menu-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.06); }
+
+  .menu-card-image {
+    height: 220px;
+    background: linear-gradient(135deg, #e8dcc8 0%, #c4b08a 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .menu-card-image::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.04) 20px, rgba(255,255,255,0.04) 21px);
+  }
+  .menu-card-image span { font-family: var(--serif); color: rgba(255,255,255,0.5); font-style: italic; font-size: 0.9rem; letter-spacing: 2px; position: relative; }
+
+  .menu-card-body { padding: 28px 24px; }
+  .menu-card-body h3 {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .menu-card-body p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .menu-card-price {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ── GALLERY ───────────────────────────────── */
+  .gallery { background: var(--bg); }
+  .gallery-header { text-align: center; margin-bottom: 60px; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 200px;
+    gap: 16px;
+  }
+  .gallery-item {
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .gallery-item::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(26,24,20,0);
+    transition: background .3s;
+  }
+  .gallery-item:hover::after { background: rgba(26,24,20,0.2); }
+
+  .gallery-item-inner {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-style: italic;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  /* Masonry-like spans */
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; background: linear-gradient(135deg, #b8a47c, #8a7654); }
+  .gallery-item:nth-child(2) { background: linear-gradient(135deg, #c4b08a, #9a8866); }
+  .gallery-item:nth-child(3) { background: linear-gradient(135deg, #a69070, #7a6c50); }
+  .gallery-item:nth-child(4) { grid-row: span 2; background: linear-gradient(135deg, #d4c5a0, #a89878); }
+  .gallery-item:nth-child(5) { background: linear-gradient(135deg, #968060, #6e5e42); }
+  .gallery-item:nth-child(6) { grid-column: span 2; background: linear-gradient(135deg, #bca87a, #8c7a56); }
+
+  /* ── RESERVATION ───────────────────────────── */
+  .reservation {
+    background: var(--bg-dark);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .reservation::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 80% 20%, rgba(139,105,20,0.08), transparent),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(139,105,20,0.05), transparent);
+  }
+  .reservation .container { position: relative; z-index: 2; }
+  .reservation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .reservation-info {}
+  .reservation-info .section-eyebrow { color: var(--accent-lt); }
+  .reservation-info .section-heading { color: #fff; }
+  .reservation-info p { color: rgba(255,255,255,0.6); font-size: 1rem; line-height: 1.9; margin-bottom: 16px; }
+  .reservation-info .detail { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; color: rgba(255,255,255,0.5); font-size: 0.9rem; }
+  .reservation-info .detail strong { color: var(--accent-lt); font-weight: 600; min-width: 80px; }
+
+  .reservation-form {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+    padding: 40px;
+    backdrop-filter: blur(12px);
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 600;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color .2s;
+    -webkit-appearance: none;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--accent-lt); }
+  .form-group select { cursor: pointer; }
+  .form-group select option { background: var(--bg-dark); color: #fff; }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+
+  .form-submit {
+    width: 100%;
+    padding: 14px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: background .3s, transform .2s;
+    margin-top: 8px;
+  }
+  .form-submit:hover { background: var(--accent-lt); transform: translateY(-1px); }
+
+  /* ── FOOTER ────────────────────────────────── */
+  footer {
+    background: var(--bg-dark);
+    color: rgba(255,255,255,0.6);
+    padding: 0;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 400px;
+  }
+  .footer-map {
+    background: linear-gradient(135deg, #2a2520, #1e1a16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .footer-map::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 41px);
+  }
+  .footer-map-placeholder {
+    position: relative;
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+  }
+  .footer-map-placeholder .pin { font-size: 2.5rem; margin-bottom: 12px; display: block; }
+  .footer-map-placeholder span { font-family: var(--serif); font-style: italic; font-size: 0.9rem; letter-spacing: 1px; }
+
+  .footer-contact { padding: 60px 48px; display: flex; flex-direction: column; justify-content: center; }
+  .footer-contact .logo { color: #fff; font-size: 1.8rem; margin-bottom: 24px; display: block; }
+  .footer-contact p { font-size: 0.95rem; line-height: 1.9; margin-bottom: 28px; }
+  .footer-detail { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; font-size: 0.9rem; }
+  .footer-detail strong { color: rgba(255,255,255,0.8); min-width: 70px; font-weight: 600; }
+
+  .footer-social { display: flex; gap: 16px; margin-top: 28px; }
+  .footer-social a {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9rem;
+    transition: all .3s;
+  }
+  .footer-social a:hover { border-color: var(--accent-lt); color: var(--accent-lt); }
+
+  .footer-bottom {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── SCROLL REVEAL ─────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .7s cubic-bezier(0.4,0,0.2,1), transform .7s cubic-bezier(0.4,0,0.2,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity:0; transform: translateX(-30px); transition: opacity .7s, transform .7s; }
+  .reveal-right { opacity:0; transform: translateX(30px); transition: opacity .7s, transform .7s; }
+  .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+  /* ── RESPONSIVE ────────────────────────────── */
+  @media (max-width: 900px) {
+    .about-grid, .reservation-grid { grid-template-columns: 1fr; gap: 40px; }
+    .menu-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+    .gallery-item:nth-child(4) { grid-row: span 1; }
+    .footer-top { grid-template-columns: 1fr; }
+    .footer-map { min-height: 250px; }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: rgba(250,248,245,0.97);
+      backdrop-filter: blur(16px);
+      padding: 24px;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    section { padding: 60px 0; }
+    .hero { min-height: 90vh; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-contact { padding: 40px 24px; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav id="mainNav">
+  <div class="container">
+    <a href="#" class="logo">Alpine <em>&</em> Co</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reservation">Reservations</a></li>
+    </ul>
+    <button class="nav-cta">Book a Table</button>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-tagline reveal">Est. 2024 · Fine Dining</p>
+    <h1 class="reveal">Where Every Meal<br>Becomes <em>a Memory</em></h1>
+    <p class="hero-desc reveal">Experience seasonal cuisine crafted with passion, served in an atmosphere of timeless elegance nestled in the heart of the Alps.</p>
+    <div class="hero-btns reveal">
+      <button class="btn-gold">Reserve a Table</button>
+      <button class="btn-outline">Explore Menu</button>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image reveal-left">
+        <div class="about-image-inner">
+          <span>Your Image Here</span>
+        </div>
+      </div>
+      <div class="about-content reveal-right">
+        <p class="section-eyebrow">Our Story</p>
+        <h2 class="section-heading">A tradition of <em>excellence</em><br>since the first day</h2>
+        <p>Born from a love of honest ingredients and mountain heritage, Alpine & Co brings together the finest local produce with culinary artistry that honors tradition while embracing innovation.</p>
+        <p>Every dish tells a story — of the farmer who grew the herbs, the cheesemaker in the valley, the baker who rises before dawn. We don't just serve food; we serve a connection to the land.</p>
+        <p class="about-signature">— Chef Laurent Dubois</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span>◆</span></div>
+
+<!-- ═══ MENU / SERVICES ═══ -->
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="menu-header reveal">
+      <p class="section-eyebrow">Our Menu</p>
+      <h2 class="section-heading">Seasonal <em>Highlights</em></h2>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card reveal">
+        <div class="menu-card-image"><span>Photo</span></div>
+        <div class="menu-card-body">
+          <h3>Wild Herb Risotto</h3>
+          <p>Arborio rice slow-cooked with foraged mountain herbs, aged Gruyère, and a drizzle of truffle oil.</p>
+          <span class="menu-card-price">CHF 38</span>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-image" style="background: linear-gradient(135deg, #d8c4a0, #a08c60);"><span>Photo</span></div>
+        <div class="menu-card-body">
+          <h3>Alpine Lamb Rack</h3>
+          <p>Herb-crusted rack of lamb from local pastures, served with roasted root vegetables and rosemary jus.</p>
+          <span class="menu-card-price">CHF 52</span>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-image" style="background: linear-gradient(135deg, #c8b890, #907c58);"><span>Photo</span></div>
+        <div class="menu-card-body">
+          <h3>Chocolate Fondant</h3>
+          <p>Valrhona dark chocolate with a molten center, accompanied by vanilla bean gelato and caramel shards.</p>
+          <span class="menu-card-price">CHF 22</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALLERY ═══ -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="gallery-header reveal">
+      <p class="section-eyebrow">Gallery</p>
+      <h2 class="section-heading">Moments at <em>Alpine</em></h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item"><div class="gallery-item-inner">Interior</div></div>
+      <div class="gallery-item"><div class="gallery-item-inner">Cuisine</div></div>
+      <div class="gallery-item"><div class="gallery-item-inner">Terrace</div></div>
+      <div class="gallery-item"><div class="gallery-item-inner">Details</div></div>
+      <div class="gallery-item"><div class="gallery-item-inner">Wine</div></div>
+      <div class="gallery-item"><div class="gallery-item-inner">Kitchen</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESERVATION ═══ -->
+<section class="reservation" id="reservation">
+  <div class="container">
+    <div class="reservation-grid">
+      <div class="reservation-info reveal-left">
+        <p class="section-eyebrow">Reservations</p>
+        <h2 class="section-heading">Reserve Your <em>Table</em></h2>
+        <p>Join us for an unforgettable dining experience. We recommend booking in advance, especially for weekend evenings and special occasions.</p>
+        <div class="detail"><strong>Hours</strong> Tue–Sun, 18:00–23:00</div>
+        <div class="detail"><strong>Phone</strong> +41 27 123 45 67</div>
+        <div class="detail"><strong>Email</strong> hello@alpine-restaurant.ch</div>
+        <div class="detail"><strong>Address</strong> Bahnhofstrasse 12, 3920 Zermatt</div>
+      </div>
+      <form class="reservation-form reveal-right" onsubmit="event.preventDefault(); this.querySelector('.form-submit').textContent='Reserved ✓'; this.querySelector('.form-submit').style.background='#22c55e';">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" required>
+          </div>
+          <div class="form-group">
+            <label for="time">Time</label>
+            <select id="time">
+              <option value="18:00">18:00</option>
+              <option value="18:30">18:30</option>
+              <option value="19:00" selected>19:00</option>
+              <option value="19:30">19:30</option>
+              <option value="20:00">20:00</option>
+              <option value="20:30">20:30</option>
+              <option value="21:00">21:00</option>
+              <option value="21:30">21:30</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="guests">Guests</label>
+            <select id="guests">
+              <option value="1">1 Guest</option>
+              <option value="2" selected>2 Guests</option>
+              <option value="3">3 Guests</option>
+              <option value="4">4 Guests</option>
+              <option value="5">5 Guests</option>
+              <option value="6">6+ Guests</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="occasion">Occasion</label>
+            <select id="occasion">
+              <option value="none">Select…</option>
+              <option value="birthday">Birthday</option>
+              <option value="anniversary">Anniversary</option>
+              <option value="business">Business</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label for="notes">Special Requests</label>
+            <textarea id="notes" placeholder="Allergies, seating preferences, celebrations…"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="form-submit">Request Reservation</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-map">
+      <div class="footer-map-placeholder">
+        <span class="pin">📍</span>
+        <span>Map Embed Placeholder<br>Bahnhofstrasse 12, Zermatt</span>
+      </div>
+    </div>
+    <div class="footer-contact">
+      <span class="logo">Alpine <em>&</em> Co</span>
+      <p>A haven of culinary excellence in the Swiss Alps. Every detail curated to create moments worth savoring.</p>
+      <div class="footer-detail"><strong>Address</strong> Bahnhofstrasse 12, 3920 Zermatt, Switzerland</div>
+      <div class="footer-detail"><strong>Phone</strong> +41 27 123 45 67</div>
+      <div class="footer-detail"><strong>Email</strong> hello@alpine-restaurant.ch</div>
+      <div class="footer-detail"><strong>Hours</strong> Tue–Sun, 18:00–23:00</div>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="#" aria-label="TripAdvisor">TA</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 Alpine & Co. All rights reserved. · <a href="#" style="color: rgba(255,255,255,0.4);">Privacy</a> · <a href="#" style="color: rgba(255,255,255,0.4);">Imprint</a>
+  </div>
+</footer>
+
+<script>
+  /* ── Hamburger ─── */
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  /* ── Nav scroll effect ─── */
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  /* ── Scroll Reveal ─── */
+  const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
