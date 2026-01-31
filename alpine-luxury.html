@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alpine Luxury — Mountain Hotel</title>
+  <style>
+    :root {
+      --navy: #0a0e1a;
+      --navy-2: #0f1426;
+      --gold: #c8a866;
+      --gold-soft: rgba(200, 168, 102, 0.35);
+      --white: #f4f1ea;
+      --white-soft: rgba(244, 241, 234, 0.8);
+      --glass: rgba(255, 255, 255, 0.08);
+      --glass-strong: rgba(255, 255, 255, 0.14);
+      --border: rgba(255, 255, 255, 0.16);
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "SF Pro Text", -apple-system, system-ui, sans-serif;
+      background: radial-gradient(1200px 800px at 20% 10%, #121a35, var(--navy)) fixed;
+      color: var(--white);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(90%, var(--max));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(92%, 1100px);
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: rgba(10, 14, 26, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 20;
+    }
+    .nav .brand {
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--white-soft);
+    }
+    .nav .links {
+      display: flex;
+      gap: 18px;
+      font-size: 0.9rem;
+    }
+    .nav .links a {
+      color: var(--white-soft);
+      transition: color 0.3s ease;
+    }
+    .nav .links a:hover { color: var(--gold); }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 140px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -20% -10% auto;
+      height: 70vh;
+      background:
+        radial-gradient(600px 400px at 20% 30%, rgba(200, 168, 102, 0.25), transparent 70%),
+        radial-gradient(800px 600px at 80% 20%, rgba(80, 110, 200, 0.2), transparent 60%);
+      z-index: 0;
+      filter: blur(10px);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 760px;
+    }
+    .hero .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      font-size: 0.7rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-size: clamp(2.6rem, 4.5vw, 4.6rem);
+      margin: 18px 0 10px;
+      font-weight: 500;
+    }
+    .hero h1 span {
+      display: inline-block;
+      background: linear-gradient(120deg, var(--white), var(--gold));
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: shimmer 6s ease-in-out infinite;
+    }
+    .hero p {
+      color: var(--white-soft);
+      font-size: 1.05rem;
+      margin: 0 auto 28px;
+      max-width: 620px;
+    }
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 12px 24px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      color: var(--white);
+      transition: transform 0.3s ease, background 0.3s ease, border 0.3s ease;
+      backdrop-filter: blur(12px);
+    }
+    .btn.primary {
+      background: linear-gradient(140deg, rgba(200, 168, 102, 0.35), rgba(200, 168, 102, 0.1));
+      border-color: rgba(200, 168, 102, 0.6);
+    }
+    .btn:hover { transform: translateY(-3px); }
+
+    .section {
+      padding: 90px 0;
+    }
+    .section h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 500;
+      margin: 0 0 10px;
+    }
+    .section p.lead {
+      color: var(--white-soft);
+      max-width: 720px;
+      margin: 0 0 36px;
+    }
+
+    .glass {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .bento {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .bento .card {
+      padding: 26px;
+      min-height: 220px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, border 0.3s ease;
+    }
+    .bento .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(200, 168, 102, 0.4);
+    }
+    .bento .card h3 {
+      margin: 0 0 10px;
+      font-weight: 500;
+    }
+    .bento .card p {
+      color: var(--white-soft);
+      margin: 0;
+    }
+    .card .accent {
+      position: absolute;
+      right: -30px;
+      top: -30px;
+      width: 120px;
+      height: 120px;
+      border-radius: 40%;
+      background: var(--gold-soft);
+      filter: blur(20px);
+    }
+
+    .rooms {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .room {
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      position: relative;
+      background: linear-gradient(140deg, rgba(255, 255, 255, 0.06), rgba(10, 14, 26, 0.7));
+      transition: transform 0.35s ease, border 0.3s ease;
+    }
+    .room::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(200, 168, 102, 0.15), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .room:hover { transform: translateY(-6px); border-color: rgba(200, 168, 102, 0.4); }
+    .room:hover::before { opacity: 1; }
+    .room-content {
+      padding: 26px;
+      position: relative;
+      z-index: 1;
+    }
+    .room h3 { margin: 0 0 8px; font-weight: 500; }
+    .room p { margin: 0 0 18px; color: var(--white-soft); }
+    .room .meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--white-soft);
+    }
+
+    .testimonials {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .testimonial {
+      padding: 26px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: var(--navy-2);
+      position: relative;
+    }
+    .testimonial p {
+      font-style: italic;
+      color: var(--white-soft);
+      margin: 0 0 18px;
+    }
+    .testimonial .name {
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .cta {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      align-items: center;
+    }
+    .cta-card {
+      padding: 32px;
+      border-radius: var(--radius-xl);
+    }
+    .cta-card h3 { margin: 0 0 10px; font-weight: 500; }
+    .cta-card p { color: var(--white-soft); margin: 0 0 18px; }
+
+    .footer {
+      padding: 40px 0 60px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--white-soft);
+      font-size: 0.9rem;
+    }
+    .footer .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    .footer strong { color: var(--white); }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes shimmer {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
+    }
+
+    @media (max-width: 720px) {
+      .nav { gap: 10px; }
+      .nav .links { display: none; }
+      .hero { padding-top: 120px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">Alpine Luxury</div>
+    <div class="links">
+      <a href="#experience">Experience</a>
+      <a href="#rooms">Rooms</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#booking">Booking</a>
+    </div>
+    <a class="btn" href="#booking">Reserve</a>
+  </nav>
+
+  <section class="hero" id="top">
+    <div class="hero-content fade-up">
+      <div class="eyebrow">A sanctuary above the clouds</div>
+      <h1>Quiet grandeur in the <span>Alpine heart</span></h1>
+      <p>Wake to glacier light, unwind beside a fire of cedar and gold, and let the mountains slow time in our bespoke suites.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#booking">Book a stay</a>
+        <a class="btn" href="#experience">Explore experiences</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="fade-up">
+        <h2>Experience alpine hospitality, refined</h2>
+        <p class="lead">From curated wellness rituals to private guide-led adventures, every detail is designed for effortless luxury.</p>
+      </div>
+      <div class="bento">
+        <article class="card glass fade-up">
+          <div class="accent"></div>
+          <h3>Signature spa rituals</h3>
+          <p>Thermal pools, cedar saunas, and bespoke treatments inspired by the alpine elements.</p>
+        </article>
+        <article class="card glass fade-up">
+          <div class="accent"></div>
+          <h3>Private mountain dining</h3>
+          <p>Chef-curated menus served in candlelit lounges or beneath a sky of stars.</p>
+        </article>
+        <article class="card glass fade-up">
+          <div class="accent"></div>
+          <h3>Guided summit journeys</h3>
+          <p>Tailored excursions with expert guides, from sunrise hikes to heli-skiing escapes.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="rooms">
+    <div class="container">
+      <div class="fade-up">
+        <h2>Suites and residences</h2>
+        <p class="lead">Architecture rooted in nature, interiors wrapped in velvet warmth, and panoramic terraces that open to the peaks.</p>
+      </div>
+      <div class="rooms">
+        <article class="room fade-up">
+          <div class="room-content">
+            <h3>Summit Suite</h3>
+            <p>Vaulted ceilings, a private hearth, and uninterrupted views of the glacier ridge.</p>
+            <div class="meta"><span>From $980</span><span>75 m²</span></div>
+          </div>
+        </article>
+        <article class="room fade-up">
+          <div class="room-content">
+            <h3>Aurora Residence</h3>
+            <p>Two-bedroom retreat with wraparound terrace and an in-room wellness studio.</p>
+            <div class="meta"><span>From $1,420</span><span>120 m²</span></div>
+          </div>
+        </article>
+        <article class="room fade-up">
+          <div class="room-content">
+            <h3>Chalet Royale</h3>
+            <p>Private chalet with dedicated concierge, wine cellar, and outdoor hot pool.</p>
+            <div class="meta"><span>From $2,850</span><span>220 m²</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="testimonials">
+    <div class="container">
+      <div class="fade-up">
+        <h2>Guest impressions</h2>
+        <p class="lead">Stories of stillness, celebration, and breathtaking alpine moments.</p>
+      </div>
+      <div class="testimonials">
+        <article class="testimonial fade-up">
+          <p>“Every corner feels curated. The service was intuitive, and the evenings by the fire were unforgettable.”</p>
+          <div class="name">Elena V., Paris</div>
+        </article>
+        <article class="testimonial fade-up">
+          <p>“The spa rituals and sunrise dining on the terrace were beyond anything we’ve experienced.”</p>
+          <div class="name">Thomas R., Zurich</div>
+        </article>
+        <article class="testimonial fade-up">
+          <p>“Luxury without spectacle — just quiet confidence and spectacular views.”</p>
+          <div class="name">Maya S., New York</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="booking">
+    <div class="container">
+      <div class="cta">
+        <div class="fade-up">
+          <h2>Reserve your alpine escape</h2>
+          <p class="lead">A dedicated host will tailor every detail, from arrival to final farewell.</p>
+        </div>
+        <div class="cta-card glass fade-up">
+          <h3>Booking Concierge</h3>
+          <p>Share your dates and preferences, and we’ll craft a private itinerary for your stay.</p>
+          <a class="btn primary" href="#top">Request availability</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="grid">
+        <div>
+          <strong>Alpine Luxury Hotel</strong><br />
+          Glacier Road 18, Val Cielo<br />
+          Switzerland
+        </div>
+        <div>
+          <strong>Contact</strong><br />
+          +41 22 555 0148<br />
+          reservations@alpinereserve.com
+        </div>
+        <div>
+          <strong>Moments</strong><br />
+          Spa &amp; Wellness<br />
+          Mountain Dining<br />
+          Guided Adventures
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    document.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
