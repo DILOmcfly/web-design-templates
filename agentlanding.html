@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgentLanding — AI Agent Service Template</title>
+<style>
+:root{--bg:#050507;--surface:#0c0c12;--card:#12121a;--border:#1e1e2e;--text:#e8e8f0;--dim:#7b7b98;--accent:#8b5cf6;--accent2:#06b6d4;--gradient:linear-gradient(135deg,#8b5cf6,#06b6d4);--radius:12px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+/* Nav */
+nav{position:fixed;top:0;width:100%;z-index:100;backdrop-filter:blur(20px);background:rgba(5,5,7,0.8);border-bottom:1px solid var(--border);}
+nav .container{display:flex;align-items:center;justify-content:space-between;height:64px;}
+.logo{font-weight:700;font-size:1.1rem;display:flex;align-items:center;gap:8px;}
+.logo-icon{width:32px;height:32px;border-radius:8px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-size:0.9rem;}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{color:var(--dim);font-size:0.9rem;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+.btn{padding:10px 22px;border-radius:50px;font-weight:600;font-size:0.9rem;transition:all .2s;cursor:pointer;border:none;}
+.btn-primary{background:var(--gradient);color:white;}
+.btn-primary:hover{opacity:0.9;transform:translateY(-1px);}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text);}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+
+/* Hero */
+.hero{padding:160px 0 100px;text-align:center;position:relative;}
+.hero::before{content:'';position:absolute;top:50%;left:50%;width:600px;height:600px;background:radial-gradient(circle,rgba(139,92,246,0.1),transparent 70%);transform:translate(-50%,-50%);pointer-events:none;}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:50px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2);color:var(--accent);font-size:0.8rem;font-weight:500;margin-bottom:24px;}
+.badge::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.hero h1{font-size:3.5rem;font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:20px;max-width:700px;margin-left:auto;margin-right:auto;}
+.hero h1 .gradient{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{color:var(--dim);font-size:1.15rem;max-width:550px;margin:0 auto 36px;line-height:1.6;}
+.hero-buttons{display:flex;gap:12px;justify-content:center;}
+.social-proof{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:40px;color:var(--dim);font-size:0.85rem;}
+.avatars{display:flex;}
+.avatars span{width:32px;height:32px;border-radius:50%;border:2px solid var(--bg);margin-left:-8px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;}
+.avatars span:nth-child(1){background:#8b5cf6;}
+.avatars span:nth-child(2){background:#06b6d4;}
+.avatars span:nth-child(3){background:#f59e0b;}
+.avatars span:nth-child(4){background:#22c55e;}
+
+/* Services */
+.section{padding:80px 0;}
+.section-header{text-align:center;margin-bottom:48px;}
+.section-header h2{font-size:2rem;font-weight:700;margin-bottom:12px;}
+.section-header p{color:var(--dim);max-width:500px;margin:0 auto;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.service-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all .3s;}
+.service-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 30px rgba(139,92,246,0.1);}
+.service-icon{width:48px;height:48px;border-radius:12px;background:rgba(139,92,246,0.1);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:16px;}
+.service-card h3{font-size:1.1rem;margin-bottom:8px;}
+.service-card p{color:var(--dim);font-size:0.9rem;line-height:1.5;}
+
+/* How it works */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;counter-reset:step;}
+.step{text-align:center;position:relative;}
+.step::before{counter-increment:step;content:counter(step);display:flex;width:40px;height:40px;align-items:center;justify-content:center;margin:0 auto 16px;border-radius:50%;background:var(--gradient);font-weight:700;font-size:1rem;}
+.step h3{margin-bottom:8px;font-size:1.05rem;}
+.step p{color:var(--dim);font-size:0.9rem;}
+
+/* Pricing */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.price-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;position:relative;transition:all .3s;}
+.price-card.featured{border-color:var(--accent);box-shadow:0 0 40px rgba(139,92,246,0.15);}
+.price-card.featured::before{content:'Most Popular';position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:4px 16px;background:var(--gradient);border-radius:50px;font-size:0.75rem;font-weight:600;}
+.price-label{font-size:0.85rem;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.price-value{font-size:2.5rem;font-weight:800;margin-bottom:4px;}
+.price-value span{font-size:1rem;font-weight:400;color:var(--dim);}
+.price-desc{color:var(--dim);font-size:0.9rem;margin-bottom:24px;}
+.price-features{list-style:none;margin-bottom:28px;}
+.price-features li{padding:8px 0;font-size:0.9rem;color:var(--dim);display:flex;align-items:center;gap:8px;}
+.price-features li::before{content:'✓';color:var(--accent);font-weight:700;}
+.price-card .btn{width:100%;text-align:center;}
+
+/* Testimonials */
+.testimonials-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.testimonial{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;}
+.testimonial-text{font-size:0.95rem;line-height:1.6;margin-bottom:16px;font-style:italic;color:var(--dim);}
+.testimonial-author{display:flex;align-items:center;gap:12px;}
+.testimonial-avatar{width:40px;height:40px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-size:0.9rem;}
+.testimonial-name{font-weight:600;font-size:0.9rem;}
+.testimonial-role{color:var(--dim);font-size:0.8rem;}
+
+/* CTA */
+.cta-section{text-align:center;padding:100px 0;position:relative;}
+.cta-section::before{content:'';position:absolute;top:50%;left:50%;width:800px;height:400px;background:radial-gradient(ellipse,rgba(6,182,212,0.08),transparent 70%);transform:translate(-50%,-50%);pointer-events:none;}
+.cta-section h2{font-size:2.5rem;font-weight:800;margin-bottom:16px;}
+.cta-section p{color:var(--dim);font-size:1.1rem;margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto;}
+
+/* Footer */
+footer{border-top:1px solid var(--border);padding:40px 0;}
+footer .container{display:flex;justify-content:space-between;align-items:center;}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{color:var(--dim);font-size:0.85rem;}
+.footer-links a:hover{color:var(--text);}
+.footer-copy{color:var(--dim);font-size:0.85rem;}
+
+/* Responsive */
+@media(max-width:768px){
+.hero h1{font-size:2.2rem;}
+.services-grid,.steps,.pricing-grid,.testimonials-grid{grid-template-columns:1fr;}
+.nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo"><div class="logo-icon">⚡</div> AgentForge</div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#" class="btn btn-primary">Book a Call</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="badge">Now accepting new clients</div>
+    <h1>AI Agents That Actually <span class="gradient">Get Work Done</span></h1>
+    <p>We build custom AI automations and intelligent agents that save you 20+ hours per week. No fluff, no hype — just workflows that work.</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn btn-primary">Start Your Project →</a>
+      <a href="#" class="btn btn-outline">See Our Work</a>
+    </div>
+    <div class="social-proof">
+      <div class="avatars">
+        <span>👩</span><span>👨</span><span>👩</span><span>👨</span>
+      </div>
+      <span>Trusted by 50+ businesses worldwide</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-header">
+      <h2>What We Build</h2>
+      <p>From simple automations to complex multi-agent systems — we've got you covered.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🤖</div>
+        <h3>Custom AI Agents</h3>
+        <p>Intelligent agents that handle customer support, data analysis, content creation, and more — 24/7 without breaks.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>N8N Automations</h3>
+        <p>Visual workflows that connect your tools and eliminate repetitive tasks. CRM, email, Slack, Notion — all synchronized.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>Data Pipelines</h3>
+        <p>Automated data collection, cleaning, and reporting. Turn raw data into actionable insights without lifting a finger.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔗</div>
+        <h3>API Integrations</h3>
+        <p>Connect any service to any other service. REST, GraphQL, webhooks — if it has an API, we can integrate it.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🧠</div>
+        <h3>RAG Systems</h3>
+        <p>Build AI that knows YOUR data. Document Q&A, knowledge bases, and smart search powered by your content.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛡️</div>
+        <h3>Maintenance & Support</h3>
+        <p>Ongoing monitoring, updates, and optimization. Your automations stay running while you focus on growing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="process" style="background:var(--surface);">
+  <div class="container">
+    <div class="section-header">
+      <h2>How It Works</h2>
+      <p>From idea to production in as little as 3 days.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <h3>Discovery Call</h3>
+        <p>We map your workflows, identify bottlenecks, and design the perfect automation strategy.</p>
+      </div>
+      <div class="step">
+        <h3>Build & Test</h3>
+        <p>We build your solution, test it thoroughly, and iterate until it's exactly what you need.</p>
+      </div>
+      <div class="step">
+        <h3>Deploy & Scale</h3>
+        <p>Go live with confidence. We handle deployment, monitoring, and ongoing optimization.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <h2>Simple Pricing</h2>
+      <p>No hidden fees. No surprises. Pay for what you need.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-label">Starter</div>
+        <div class="price-value">$497 <span>/ project</span></div>
+        <p class="price-desc">Perfect for simple automations</p>
+        <ul class="price-features">
+          <li>1 workflow or integration</li>
+          <li>Up to 5 connected tools</li>
+          <li>Basic error handling</li>
+          <li>Documentation included</li>
+          <li>7 days of support</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Get Started</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-label">Professional</div>
+        <div class="price-value">$1,497 <span>/ project</span></div>
+        <p class="price-desc">For complex multi-step workflows</p>
+        <ul class="price-features">
+          <li>Up to 5 workflows</li>
+          <li>AI agent included</li>
+          <li>Unlimited tool connections</li>
+          <li>Advanced error handling</li>
+          <li>30 days of support</li>
+          <li>Performance dashboard</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Start Your Project</a>
+      </div>
+      <div class="price-card">
+        <div class="price-label">Enterprise</div>
+        <div class="price-value">Custom</div>
+        <p class="price-desc">Full automation infrastructure</p>
+        <ul class="price-features">
+          <li>Unlimited workflows</li>
+          <li>Multi-agent systems</li>
+          <li>Custom RAG systems</li>
+          <li>Dedicated support</li>
+          <li>SLA guarantee</li>
+          <li>Training for your team</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Book a Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <h2>What Clients Say</h2>
+      <p>Real results from real businesses.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <p class="testimonial-text">"They automated our entire onboarding flow in 3 days. What used to take our team 4 hours per client now happens in minutes. The ROI was immediate."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">👩</div>
+          <div><div class="testimonial-name">Sarah Chen</div><div class="testimonial-role">CEO, TechStart Inc.</div></div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">"The AI agent they built handles 80% of our support tickets autonomously. Our response time went from 2 hours to 30 seconds. Game changer."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">👨</div>
+          <div><div class="testimonial-name">Marcus Johnson</div><div class="testimonial-role">CTO, DataFlow Labs</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to Automate?</h2>
+    <p>Book a free 30-minute discovery call. We'll map your workflows and show you what's possible.</p>
+    <a href="#" class="btn btn-primary" style="padding:14px 32px;font-size:1rem;">Book Your Free Call →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-copy">© 2026 AgentForge. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
