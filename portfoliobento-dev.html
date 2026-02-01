@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PortfolioBento — Developer Portfolio Template</title>
+<style>
+:root{--bg:#0a0a0a;--card:#141414;--card-hover:#1a1a1a;--border:#222;--text:#eee;--dim:#888;--accent:#6366f1;--green:#22c55e;--blue:#3b82f6;--orange:#f97316;--radius:16px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;min-height:100vh;padding:24px;}
+
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(180px,auto);gap:16px;max-width:1200px;margin:0 auto;}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all .3s ease;overflow:hidden;position:relative;}
+.card:hover{background:var(--card-hover);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.3);}
+
+/* Span classes */
+.span-2{grid-column:span 2;}
+.span-3{grid-column:span 3;}
+.span-row-2{grid-row:span 2;}
+.full-width{grid-column:1/-1;}
+
+/* Hero card */
+.hero-card{display:flex;flex-direction:column;justify-content:center;}
+.hero-card h1{font-size:2.8rem;font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:12px;}
+.hero-card h1 span{background:linear-gradient(135deg,var(--accent),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-card p{color:var(--dim);font-size:1.05rem;max-width:400px;}
+.hero-card .status{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:0.85rem;color:var(--green);}
+.hero-card .status::before{content:'';width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.5;}}
+
+/* Avatar card */
+.avatar-card{display:flex;align-items:center;justify-content:center;}
+.avatar{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--blue));display:flex;align-items:center;justify-content:center;font-size:3rem;}
+
+/* Stats card */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;height:100%;}
+.stat-item{text-align:center;display:flex;flex-direction:column;justify-content:center;}
+.stat-val{font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-label{font-size:0.75rem;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+
+/* Tech stack card */
+.tech-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.tech-tag{padding:6px 14px;border-radius:8px;font-size:0.8rem;font-weight:500;background:rgba(99,102,241,0.1);color:var(--accent);border:1px solid rgba(99,102,241,0.2);}
+
+/* Project cards */
+.project-card{display:flex;flex-direction:column;justify-content:space-between;}
+.project-card .tag{font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-bottom:8px;}
+.project-card h3{font-size:1.2rem;margin-bottom:8px;}
+.project-card p{color:var(--dim);font-size:0.9rem;flex:1;}
+.project-link{display:inline-flex;align-items:center;gap:4px;color:var(--accent);font-size:0.85rem;text-decoration:none;margin-top:12px;}
+.project-link:hover{text-decoration:underline;}
+
+/* Experience card */
+.exp-item{padding:12px 0;border-bottom:1px solid var(--border);}
+.exp-item:last-child{border:none;}
+.exp-role{font-weight:600;}
+.exp-company{color:var(--accent);font-size:0.9rem;}
+.exp-date{color:var(--dim);font-size:0.8rem;}
+
+/* Contact card */
+.contact-links{display:flex;flex-direction:column;gap:10px;margin-top:12px;}
+.contact-link{display:flex;align-items:center;gap:8px;color:var(--dim);text-decoration:none;font-size:0.9rem;transition:color .2s;}
+.contact-link:hover{color:var(--text);}
+
+/* Card labels */
+.card-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);margin-bottom:12px;}
+
+/* Map card */
+.map-card{background:var(--card);display:flex;align-items:center;justify-content:center;font-size:3rem;}
+
+/* CTA card */
+.cta-card{background:linear-gradient(135deg,rgba(99,102,241,0.15),rgba(59,130,246,0.1));border-color:rgba(99,102,241,0.3);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.cta-card h3{font-size:1.4rem;margin-bottom:8px;}
+.cta-btn{display:inline-flex;padding:12px 28px;background:var(--accent);color:white;border-radius:50px;text-decoration:none;font-weight:600;margin-top:16px;transition:all .2s;}
+.cta-btn:hover{transform:scale(1.05);}
+
+/* Responsive */
+@media(max-width:1024px){.bento{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.bento{grid-template-columns:1fr;}.span-2,.span-3{grid-column:span 1;}}
+</style>
+</head>
+<body>
+
+<div class="bento">
+  <!-- Hero -->
+  <div class="card span-2 hero-card">
+    <h1>Hi, I'm <span>Diego</span> 👋</h1>
+    <p>Full-stack developer, data scientist, and automation architect based in Zermatt, Switzerland.</p>
+    <div class="status">Available for freelance</div>
+  </div>
+
+  <!-- Avatar -->
+  <div class="card avatar-card">
+    <div class="avatar">🏔️</div>
+  </div>
+
+  <!-- Stats -->
+  <div class="card">
+    <div class="stat-grid">
+      <div class="stat-item"><div class="stat-val">14</div><div class="stat-label">Repos</div></div>
+      <div class="stat-item"><div class="stat-val">109</div><div class="stat-label">Tests</div></div>
+      <div class="stat-item"><div class="stat-val">11</div><div class="stat-label">Templates</div></div>
+      <div class="stat-item"><div class="stat-val">5</div><div class="stat-label">CLI Tools</div></div>
+    </div>
+  </div>
+
+  <!-- Tech Stack -->
+  <div class="card span-2">
+    <div class="card-label">Tech Stack</div>
+    <div class="tech-grid">
+      <span class="tech-tag">Python</span><span class="tech-tag">TypeScript</span>
+      <span class="tech-tag">n8n</span><span class="tech-tag">OpenAI</span>
+      <span class="tech-tag">pandas</span><span class="tech-tag">scikit-learn</span>
+      <span class="tech-tag">Streamlit</span><span class="tech-tag">Node.js</span>
+      <span class="tech-tag">HTML/CSS</span><span class="tech-tag">Git</span>
+      <span class="tech-tag">SQL</span><span class="tech-tag">Shell</span>
+    </div>
+  </div>
+
+  <!-- Location -->
+  <div class="card map-card">
+    <div>🇨🇭<br><span style="font-size:0.8rem;color:var(--dim);">Zermatt</span></div>
+  </div>
+
+  <!-- Contact -->
+  <div class="card">
+    <div class="card-label">Connect</div>
+    <div class="contact-links">
+      <a href="#" class="contact-link">→ GitHub</a>
+      <a href="#" class="contact-link">→ LinkedIn</a>
+      <a href="#" class="contact-link">→ Email</a>
+      <a href="#" class="contact-link">→ Fiverr</a>
+    </div>
+  </div>
+
+  <!-- Project 1 -->
+  <div class="card span-2 project-card">
+    <div>
+      <div class="tag">Featured Project</div>
+      <h3>🏨 Hospitality Sentiment Analyzer</h3>
+      <p>NLP-powered analysis of 500+ hotel & restaurant reviews. Identifies patterns in guest feedback to improve service quality. Built with real hospitality domain knowledge.</p>
+    </div>
+    <a href="#" class="project-link">View on GitHub →</a>
+  </div>
+
+  <!-- Project 2 -->
+  <div class="card span-2 project-card">
+    <div>
+      <div class="tag">Data Science</div>
+      <h3>🏔️ Tourism Demand Forecaster</h3>
+      <p>Time series forecasting for Alpine tourism. 96 months of data with COVID impact analysis. Interactive Streamlit dashboard for exploring seasonal patterns.</p>
+    </div>
+    <a href="#" class="project-link">View on GitHub →</a>
+  </div>
+
+  <!-- Experience -->
+  <div class="card span-2">
+    <div class="card-label">Experience</div>
+    <div class="exp-item">
+      <div class="exp-role">AI Automation Specialist</div>
+      <div class="exp-company">Freelance</div>
+      <div class="exp-date">2026 — Present</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-role">Chef de Rang</div>
+      <div class="exp-company">CERVO Mountain Resort</div>
+      <div class="exp-date">2022 — Present</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="card span-2 cta-card">
+    <h3>Let's build something together</h3>
+    <p style="color:var(--dim);font-size:0.95rem;">AI automation, data science, web design — I ship fast and clean.</p>
+    <a href="#" class="cta-btn">Get in Touch →</a>
+  </div>
+</div>
+
+</body>
+</html>
