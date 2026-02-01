@@ -1,83 +1,70 @@
-# 🎨 Premium Landing Page Templates
+# 🎨 Web Design Templates Collection
 
-Two modern, responsive, framework-free landing page templates. Every template is a **single self-contained HTML file** — just open in a browser.
+Premium, production-ready landing page templates. Zero dependencies. Single-file HTML+CSS. Ready to customize and deploy.
 
----
+## Templates (7)
 
-## ❄️ Frost — SaaS / Tech Landing
-
-**Style:** Glassmorphism · Dark theme · Gradient mesh
-
-![Preview](https://img.shields.io/badge/style-glassmorphism-6366f1)
-
-| Section | Description |
-|---------|-------------|
-| Hero | Gradient mesh background, animated orbs, large headline with gradient text, dual CTAs with hover glow |
-| Features | 3 glass cards with icons, hover lift + glow border effect |
-| Pricing | 3-tier comparison with "Most Popular" badge, hover animations |
-| Testimonials | Auto-advancing carousel with dots navigation |
-| Footer | 4-column grid with newsletter signup form |
-
-**Open:** `frost.html`
-
----
-
-## 🏔️ Alpine — Restaurant / Hotel Landing
-
-**Style:** Serif typography · Warm earth tones · Elegant minimal
-
-![Preview](https://img.shields.io/badge/style-elegant_minimal-8b6914)
-
-| Section | Description |
-|---------|-------------|
-| Hero | Full-width dark overlay with scroll indicator, serif display text |
-| About | Split layout (image + text) with directional reveal animations |
-| Menu | 3 elegant cards with image placeholders and pricing |
-| Gallery | CSS grid masonry layout (6 items, mixed spans) |
-| Reservation | Dark section with detailed booking form (date/time/guests/occasion) |
-| Footer | Map placeholder + contact details + social links |
-
-**Open:** `alpine.html`
-
----
+| # | Template | Theme | Type | Size | Preview |
+|---|----------|-------|------|------|---------|
+| 1 | **Alpine Luxury** | Dark | Hotel/Resort Landing | 11KB | [alpine-luxury.html](alpine-luxury.html) |
+| 2 | **Alpine** | Dark | Mountain Sports | 8KB | [alpine.html](alpine.html) |
+| 3 | **Frost** | Dark | Minimal Portfolio | 6KB | [frost.html](frost.html) |
+| 4 | **NeuraSaaS** | Dark | AI SaaS Glassmorphism | 13KB | [neurasaas-ai-landing.html](neurasaas-ai-landing.html) |
+| 5 | **PortfolioBento** | Dark | Developer Portfolio Bento Grid | 8KB | [portfoliobento-dev.html](portfoliobento-dev.html) |
+| 6 | **AgentLanding** | Dark | AI Agent/Automation Service | 15KB | [agentlanding.html](agentlanding.html) |
+| 7 | **StartupStack** | Light | SaaS Startup Landing | 14KB | [startupstack.html](startupstack.html) |
 
 ## Features
 
-- ✅ **Zero dependencies** — no frameworks, no build step
-- ✅ **Single-file** — HTML + CSS + JS all inline
-- ✅ **Mobile responsive** — tested across breakpoints
-- ✅ **Scroll animations** — IntersectionObserver reveal effects
-- ✅ **Accessible** — semantic HTML, aria labels, keyboard-friendly
-- ✅ **Google Fonts** — Inter + Playfair Display (loaded via CDN)
+- ✅ **Zero dependencies** — pure HTML + CSS (+ minimal vanilla JS)
+- ✅ **Responsive** — works on all devices
+- ✅ **Production-ready** — clean code, semantic HTML
+- ✅ **Single-file** — each template is one `.html` file
+- ✅ **Dark & Light themes** — variety for different brands
+- ✅ **Modern design** — glassmorphism, bento grids, gradients
 
-## Usage
+## Use Cases
+
+- 🚀 Startup landing pages
+- 🤖 AI/SaaS product marketing
+- 🏔️ Hospitality & tourism
+- 💼 Developer portfolios
+- ⚡ Automation service pages
+- 🛠️ Freelancer showcases
+
+## Quick Start
 
 ```bash
-# Just open in browser
-open frost.html
-open alpine.html
+# Clone
+git clone https://github.com/DILOmcfly/web-design-templates.git
 
-# Or serve locally
-python3 -m http.server 8000
+# Open any template
+open neurasaas-ai-landing.html
 ```
+
+Each template is self-contained. Edit the HTML to customize content, colors, and branding.
 
 ## Customization
 
-Everything is in CSS custom properties (`:root` variables). Change colors, fonts, and spacing in seconds:
+All templates use CSS custom properties (`:root`) for easy theming:
 
 ```css
-/* Frost */
---accent: #6366f1;    /* Primary color */
---bg: #0a0a0f;        /* Background */
-
-/* Alpine */
---accent: #8b6914;    /* Gold accent */
---bg: #faf8f5;        /* Warm white */
+:root {
+  --bg: #0a0a0f;
+  --accent: #8b5cf6;
+  --text: #e8e8f0;
+  /* Change these to rebrand instantly */
+}
 ```
 
-Replace image placeholders with your own `<img>` tags or CSS `background-image` URLs.
+## Pricing
+
+See [PRICING.md](PRICING.md) for licensing options.
+
+## Author
+
+Built by [Diego](https://github.com/DILOmcfly) — AI automation specialist & web developer based in Zermatt, Switzerland.
 
 ---
 
-**Author:** Diego Farango · [DILOmcfly](https://github.com/DILOmcfly)  
-**License:** MIT
+*Need a custom landing page? [Get in touch](https://fiverr.com/aurashubsamurai).*
