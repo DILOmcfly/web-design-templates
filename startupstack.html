@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StartupStack — Modern Startup Landing Page</title>
+<style>
+:root{--bg:#fafafa;--surface:#fff;--card:#fff;--border:#e5e5e5;--text:#1a1a1a;--dim:#666;--accent:#2563eb;--accent-light:rgba(37,99,235,0.08);--green:#059669;--radius:12px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;}
+a{text-decoration:none;color:inherit;}
+.container{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+/* Nav */
+nav{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+nav .container{display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{font-weight:800;font-size:1.15rem;color:var(--accent);}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{color:var(--dim);font-size:0.9rem;font-weight:500;}
+.nav-links a:hover{color:var(--text);}
+.btn{padding:10px 22px;border-radius:8px;font-weight:600;font-size:0.9rem;cursor:pointer;border:none;transition:all .15s;}
+.btn-primary{background:var(--accent);color:white;}
+.btn-primary:hover{background:#1d4ed8;}
+.btn-secondary{background:var(--accent-light);color:var(--accent);}
+.btn-secondary:hover{background:rgba(37,99,235,0.12);}
+
+/* Hero */
+.hero{padding:100px 0 80px;text-align:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:50px;background:var(--accent-light);color:var(--accent);font-size:0.8rem;font-weight:600;margin-bottom:20px;}
+.hero h1{font-size:3.2rem;font-weight:800;letter-spacing:-0.03em;line-height:1.15;margin-bottom:16px;}
+.hero p{color:var(--dim);font-size:1.1rem;max-width:520px;margin:0 auto 32px;line-height:1.6;}
+.hero-cta{display:flex;gap:12px;justify-content:center;}
+.hero-stats{display:flex;gap:48px;justify-content:center;margin-top:48px;}
+.hero-stat{text-align:center;}
+.hero-stat .number{font-size:2rem;font-weight:800;color:var(--accent);}
+.hero-stat .label{color:var(--dim);font-size:0.8rem;margin-top:2px;}
+
+/* Logos */
+.logos-section{padding:48px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.logos-section p{text-align:center;color:var(--dim);font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;}
+.logos{display:flex;justify-content:center;gap:48px;align-items:center;opacity:0.4;}
+.logos span{font-size:1.2rem;font-weight:700;color:var(--dim);}
+
+/* Features */
+.section{padding:80px 0;}
+.section-header{text-align:center;margin-bottom:48px;}
+.section-header h2{font-size:2rem;font-weight:800;margin-bottom:8px;}
+.section-header p{color:var(--dim);max-width:450px;margin:0 auto;}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.feature-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:box-shadow .2s;}
+.feature-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.06);}
+.feature-icon{width:44px;height:44px;border-radius:10px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px;}
+.feature-card h3{font-size:1rem;margin-bottom:6px;}
+.feature-card p{color:var(--dim);font-size:0.88rem;line-height:1.5;}
+
+/* Big feature */
+.big-feature{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:60px 0;}
+.big-feature-text h2{font-size:1.8rem;font-weight:800;margin-bottom:12px;}
+.big-feature-text p{color:var(--dim);font-size:1rem;line-height:1.7;margin-bottom:20px;}
+.big-feature-visual{background:linear-gradient(135deg,var(--accent-light),rgba(5,150,105,0.08));border-radius:16px;height:320px;display:flex;align-items:center;justify-content:center;font-size:4rem;}
+.check-list{list-style:none;}
+.check-list li{padding:6px 0;display:flex;align-items:center;gap:8px;color:var(--dim);font-size:0.92rem;}
+.check-list li::before{content:'✓';color:var(--green);font-weight:700;}
+
+/* Pricing */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.price-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;}
+.price-card.pop{border-color:var(--accent);box-shadow:0 4px 24px rgba(37,99,235,0.12);position:relative;}
+.price-card.pop::before{content:'Popular';position:absolute;top:-10px;right:20px;padding:3px 12px;background:var(--accent);color:white;border-radius:50px;font-size:0.7rem;font-weight:600;}
+.price-name{font-weight:600;margin-bottom:8px;}
+.price-amount{font-size:2.4rem;font-weight:800;margin-bottom:4px;}
+.price-amount span{font-size:0.9rem;font-weight:400;color:var(--dim);}
+.price-desc{color:var(--dim);font-size:0.85rem;margin-bottom:20px;}
+.price-list{list-style:none;margin-bottom:24px;}
+.price-list li{padding:6px 0;font-size:0.85rem;color:var(--dim);display:flex;align-items:center;gap:6px;}
+.price-list li::before{content:'•';color:var(--accent);}
+.price-card .btn{width:100%;text-align:center;display:block;}
+
+/* FAQ */
+.faq-grid{max-width:700px;margin:0 auto;}
+.faq-item{border-bottom:1px solid var(--border);padding:20px 0;}
+.faq-q{font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+.faq-q::after{content:'+';font-size:1.2rem;color:var(--dim);}
+.faq-a{color:var(--dim);font-size:0.9rem;line-height:1.6;margin-top:12px;display:none;}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open .faq-q::after{content:'−';}
+
+/* CTA */
+.final-cta{background:var(--accent);border-radius:16px;padding:60px;text-align:center;color:white;margin:40px 0;}
+.final-cta h2{font-size:2rem;font-weight:800;margin-bottom:12px;}
+.final-cta p{opacity:0.8;margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto;}
+.btn-white{background:white;color:var(--accent);font-weight:600;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;font-size:0.95rem;}
+.btn-white:hover{background:#f0f0f0;}
+
+/* Footer */
+footer{padding:40px 0;border-top:1px solid var(--border);}
+footer .container{display:flex;justify-content:space-between;align-items:center;}
+.footer-links a{color:var(--dim);font-size:0.85rem;margin-left:20px;}
+
+@media(max-width:768px){
+.hero h1{font-size:2rem;}
+.features-grid,.pricing-grid{grid-template-columns:1fr;}
+.big-feature{grid-template-columns:1fr;}
+.hero-stats{flex-wrap:wrap;gap:24px;}
+.nav-links{display:none;}
+}
+
+/* FAQ toggle */
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">StartupStack ✦</div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#" class="btn btn-primary">Get Started Free</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">🚀 Now in Public Beta</div>
+    <h1>Ship faster.<br>Grow smarter.</h1>
+    <p>The all-in-one platform for startups that takes you from idea to revenue. Analytics, billing, auth — all built in.</p>
+    <div class="hero-cta">
+      <a href="#" class="btn btn-primary" style="padding:12px 28px;">Start Building Free →</a>
+      <a href="#" class="btn btn-secondary" style="padding:12px 28px;">Watch Demo</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="number">2,400+</div><div class="label">Active Startups</div></div>
+      <div class="hero-stat"><div class="number">$14M</div><div class="label">Revenue Generated</div></div>
+      <div class="hero-stat"><div class="number">99.9%</div><div class="label">Uptime SLA</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="logos-section">
+  <div class="container">
+    <p>Trusted by teams at</p>
+    <div class="logos">
+      <span>Stripe</span><span>Vercel</span><span>Linear</span><span>Notion</span><span>Figma</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-header">
+      <h2>Everything you need to launch</h2>
+      <p>Stop gluing together 12 different tools. One platform, everything built in.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Real-time Analytics</h3>
+        <p>Track MRR, churn, LTV, and 30+ metrics in one dashboard. No setup required.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💳</div>
+        <h3>Built-in Billing</h3>
+        <p>Subscriptions, one-time payments, usage-based pricing. Stripe integration in 2 clicks.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3>Auth & Teams</h3>
+        <p>Social login, SSO, role-based access. Enterprise-grade auth out of the box.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h3>Deploy Anywhere</h3>
+        <p>One-click deploy to Vercel, AWS, or self-host. Your infra, your rules.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI Assistant</h3>
+        <p>Built-in AI that helps you write copy, analyze data, and automate workflows.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📧</div>
+        <h3>Email Sequences</h3>
+        <p>Onboarding flows, drip campaigns, transactional emails. All template-based.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="big-feature">
+    <div class="big-feature-text">
+      <h2>Analytics that actually matter</h2>
+      <p>Forget vanity metrics. Track what moves the needle for your startup.</p>
+      <ul class="check-list">
+        <li>Monthly Recurring Revenue (MRR)</li>
+        <li>Customer Lifetime Value (LTV)</li>
+        <li>Churn rate by cohort</li>
+        <li>Revenue per employee</li>
+        <li>Runway calculator</li>
+      </ul>
+    </div>
+    <div class="big-feature-visual">📈</div>
+  </div>
+</div>
+
+<section class="section" style="background:#f0f4ff;" id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <h2>Start free, scale infinitely</h2>
+      <p>No credit card required. Upgrade when you're ready.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name">Starter</div>
+        <div class="price-amount">$0 <span>/ month</span></div>
+        <p class="price-desc">For solo founders just starting out</p>
+        <ul class="price-list">
+          <li>Up to 100 users</li>
+          <li>Basic analytics</li>
+          <li>Stripe integration</li>
+          <li>Community support</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Get Started Free</a>
+      </div>
+      <div class="price-card pop">
+        <div class="price-name">Growth</div>
+        <div class="price-amount">$49 <span>/ month</span></div>
+        <p class="price-desc">For growing startups with traction</p>
+        <ul class="price-list">
+          <li>Unlimited users</li>
+          <li>Advanced analytics</li>
+          <li>AI assistant</li>
+          <li>Email sequences</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Start Free Trial</a>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Scale</div>
+        <div class="price-amount">$199 <span>/ month</span></div>
+        <p class="price-desc">For teams ready to dominate</p>
+        <ul class="price-list">
+          <li>Everything in Growth</li>
+          <li>SSO & RBAC</li>
+          <li>Custom integrations</li>
+          <li>Dedicated account manager</li>
+          <li>SLA guarantee</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <h2>Questions? Answers.</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q">How is this different from building it myself?</div>
+        <div class="faq-a">Building auth, billing, analytics, and email from scratch takes 3-6 months. We've done it for you. Ship your product in days, not months.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I use my own domain?</div>
+        <div class="faq-a">Absolutely. Custom domains are supported on all plans, including free. Point your DNS and you're live.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if I outgrow the platform?</div>
+        <div class="faq-a">You won't — we scale with you. But if you ever want to leave, we offer full data export in standard formats.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is there a free trial?</div>
+        <div class="faq-a">The Starter plan is free forever. Growth and Scale plans include a 14-day free trial. No credit card required.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="final-cta">
+    <h2>Ready to launch?</h2>
+    <p>Join 2,400+ startups already building with StartupStack.</p>
+    <button class="btn-white">Get Started Free →</button>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <span style="color:var(--dim);font-size:0.85rem;">© 2026 StartupStack</span>
+    <div class="footer-links">
+      <a href="#">Blog</a><a href="#">Docs</a><a href="#">Privacy</a><a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click',()=>{
+    item.classList.toggle('open');
+  });
+});
+</script>
+
+</body>
+</html>
