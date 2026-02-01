@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuraSaaS — AI-Powered SaaS Landing Page</title>
+<style>
+:root {
+  --bg: #050510; --surface: #0a0a1a; --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08); --glass-hover: rgba(255,255,255,0.07);
+  --text: #e4e4f0; --text-dim: #8888a8; --text-muted: #555570;
+  --accent: #7c5cff; --accent-glow: rgba(124,92,255,0.15);
+  --accent2: #00d4ff; --accent2-glow: rgba(0,212,255,0.12);
+  --gradient: linear-gradient(135deg, #7c5cff, #00d4ff);
+  --radius: 16px; --radius-sm: 10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6;overflow-x:hidden;}
+
+/* Typography */
+h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;letter-spacing:-0.03em;line-height:1.08;}
+h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:700;letter-spacing:-0.02em;line-height:1.15;}
+h3{font-size:1.25rem;font-weight:600;}
+p{color:var(--text-dim);font-size:1.05rem;}
+
+/* Layout */
+.container{max-width:1200px;margin:0 auto;padding:0 24px;}
+section{padding:100px 0;}
+
+/* Glass Card */
+.glass{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:var(--radius);transition:all 0.3s ease;}
+.glass:hover{background:var(--glass-hover);border-color:rgba(255,255,255,0.12);transform:translateY(-2px);}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:50px;font-size:1rem;font-weight:600;text-decoration:none;transition:all 0.3s ease;cursor:pointer;border:none;}
+.btn-primary{background:var(--gradient);color:#fff;box-shadow:0 4px 24px var(--accent-glow);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(124,92,255,0.3);}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--glass-border);}
+.btn-ghost:hover{background:var(--glass);border-color:rgba(255,255,255,0.15);}
+
+/* Navigation */
+nav{position:fixed;top:0;width:100%;z-index:100;padding:16px 0;background:rgba(5,5,16,0.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);}
+nav .container{display:flex;justify-content:space-between;align-items:center;}
+.logo{font-size:1.3rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{color:var(--text-dim);text-decoration:none;font-size:0.9rem;transition:color 0.2s;}
+.nav-links a:hover{color:var(--text);}
+
+/* Hero */
+.hero{padding:160px 0 100px;text-align:center;position:relative;}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none;}
+.hero h1 .gradient{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{max-width:600px;margin:20px auto 40px;font-size:1.2rem;}
+.hero-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.hero-badge{display:inline-block;padding:6px 16px;border-radius:50px;background:var(--glass);border:1px solid var(--glass-border);font-size:0.8rem;color:var(--accent);margin-bottom:24px;}
+.hero-visual{margin-top:60px;position:relative;}
+.hero-mockup{width:100%;max-width:900px;height:400px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);margin:0 auto;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;}
+
+/* Features */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-top:48px;}
+.feature-card{padding:32px;position:relative;overflow:hidden;}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gradient);opacity:0;transition:opacity 0.3s;}
+.feature-card:hover::before{opacity:1;}
+.feature-icon{font-size:2rem;margin-bottom:16px;display:block;}
+.feature-card h3{margin-bottom:8px;}
+.feature-card p{font-size:0.95rem;}
+
+/* Social Proof */
+.logos{display:flex;gap:48px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:48px;opacity:0.5;}
+.logos span{font-size:1.2rem;font-weight:700;color:var(--text-dim);}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:48px;text-align:center;}
+.stat{padding:32px;}
+.stat-val{font-size:2.5rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-label{color:var(--text-dim);font-size:0.9rem;margin-top:4px;}
+
+/* Pricing */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:48px;}
+.pricing-card{padding:40px 32px;text-align:center;}
+.pricing-card.featured{border-color:var(--accent);position:relative;}
+.pricing-card.featured::before{content:'POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gradient);padding:4px 16px;border-radius:50px;font-size:0.7rem;font-weight:700;letter-spacing:1px;}
+.price{font-size:3rem;font-weight:800;margin:16px 0 8px;}
+.price span{font-size:1rem;color:var(--text-dim);font-weight:400;}
+.pricing-features{list-style:none;text-align:left;margin:24px 0;padding:0;}
+.pricing-features li{padding:8px 0;color:var(--text-dim);font-size:0.95rem;border-bottom:1px solid var(--glass-border);}
+.pricing-features li::before{content:'✓ ';color:var(--accent);}
+
+/* CTA */
+.cta{text-align:center;padding:120px 0;position:relative;}
+.cta::before{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,var(--accent2-glow) 0%,transparent 70%);pointer-events:none;}
+.cta h2{margin-bottom:16px;}
+.cta p{max-width:500px;margin:0 auto 32px;}
+
+/* Footer */
+footer{border-top:1px solid var(--glass-border);padding:40px 0;text-align:center;color:var(--text-muted);font-size:0.85rem;}
+
+/* Responsive */
+@media(max-width:768px){
+  section{padding:60px 0;}
+  .hero{padding:120px 0 60px;}
+  .nav-links{display:none;}
+  .features-grid{grid-template-columns:1fr;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .logos{gap:24px;}
+}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero h1,.hero p,.hero-buttons,.hero-badge{animation:fadeUp 0.8s ease forwards;opacity:0;}
+.hero h1{animation-delay:0.1s;}
+.hero p{animation-delay:0.2s;}
+.hero-buttons{animation-delay:0.3s;}
+.hero-badge{animation-delay:0s;}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="container">
+    <div class="logo">neura✦</div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#" class="btn btn-primary" style="padding:10px 24px;font-size:0.85rem;">Get Started →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <span class="hero-badge">🚀 Trusted by 2,000+ teams worldwide</span>
+    <h1>Build smarter with<br><span class="gradient">AI-powered workflows</span></h1>
+    <p>Automate your entire business with intelligent agents that learn, adapt, and scale. No code required.</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn btn-primary">Start Free Trial →</a>
+      <a href="#" class="btn btn-ghost">Watch Demo ▶</a>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-mockup glass">[ Your Product Screenshot / Demo Video Here ]</div>
+    </div>
+  </div>
+</section>
+
+<!-- Social Proof Logos -->
+<section style="padding:40px 0;">
+  <div class="container">
+    <div class="logos">
+      <span>Acme Inc</span><span>TechCorp</span><span>DataFlow</span><span>CloudBase</span><span>AIStack</span><span>NeuralOps</span>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+  <div class="container">
+    <div style="text-align:center;">
+      <h2>Everything you need to<br><span style="background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">automate at scale</span></h2>
+      <p style="max-width:500px;margin:16px auto 0;">Powerful features that transform how your team works. Set up in minutes, not months.</p>
+    </div>
+    <div class="features-grid">
+      <div class="glass feature-card">
+        <span class="feature-icon">🤖</span>
+        <h3>AI Agents</h3>
+        <p>Autonomous agents that handle complex workflows, make decisions, and learn from outcomes.</p>
+      </div>
+      <div class="glass feature-card">
+        <span class="feature-icon">⚡</span>
+        <h3>Instant Workflows</h3>
+        <p>Build automation in minutes with our visual editor. Connect 400+ apps without writing code.</p>
+      </div>
+      <div class="glass feature-card">
+        <span class="feature-icon">📊</span>
+        <h3>Smart Analytics</h3>
+        <p>Real-time dashboards that surface insights automatically. Know what matters before it matters.</p>
+      </div>
+      <div class="glass feature-card">
+        <span class="feature-icon">🔒</span>
+        <h3>Enterprise Security</h3>
+        <p>SOC 2 compliant. Self-hosted option. Your data never leaves your infrastructure.</p>
+      </div>
+      <div class="glass feature-card">
+        <span class="feature-icon">🌐</span>
+        <h3>Global Scale</h3>
+        <p>Handle millions of events per second. Auto-scaling infrastructure that grows with you.</p>
+      </div>
+      <div class="glass feature-card">
+        <span class="feature-icon">🔄</span>
+        <h3>API-First</h3>
+        <p>Full REST & GraphQL APIs. Webhooks, SDKs, and developer tools for complete control.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section>
+  <div class="container">
+    <div class="stats-grid">
+      <div class="glass stat">
+        <div class="stat-val">2,847</div>
+        <div class="stat-label">Active Teams</div>
+      </div>
+      <div class="glass stat">
+        <div class="stat-val">12M+</div>
+        <div class="stat-label">Tasks Automated</div>
+      </div>
+      <div class="glass stat">
+        <div class="stat-val">99.9%</div>
+        <div class="stat-label">Uptime SLA</div>
+      </div>
+      <div class="glass stat">
+        <div class="stat-val">4.9★</div>
+        <div class="stat-label">Customer Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <div class="container">
+    <div style="text-align:center;">
+      <h2>Simple, transparent pricing</h2>
+      <p>Start free. Scale as you grow. No hidden fees.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="glass pricing-card">
+        <h3>Starter</h3>
+        <div class="price">$0<span>/mo</span></div>
+        <p style="font-size:0.9rem;">For individuals exploring AI automation</p>
+        <ul class="pricing-features">
+          <li>100 tasks/month</li>
+          <li>3 workflows</li>
+          <li>Community support</li>
+          <li>Basic analytics</li>
+        </ul>
+        <a href="#" class="btn btn-ghost" style="width:100%;justify-content:center;">Get Started</a>
+      </div>
+      <div class="glass pricing-card featured">
+        <h3>Pro</h3>
+        <div class="price">$49<span>/mo</span></div>
+        <p style="font-size:0.9rem;">For growing teams that need more power</p>
+        <ul class="pricing-features">
+          <li>10,000 tasks/month</li>
+          <li>Unlimited workflows</li>
+          <li>AI agents included</li>
+          <li>Priority support</li>
+          <li>Advanced analytics</li>
+        </ul>
+        <a href="#" class="btn btn-primary" style="width:100%;justify-content:center;">Start Free Trial →</a>
+      </div>
+      <div class="glass pricing-card">
+        <h3>Enterprise</h3>
+        <div class="price">Custom</div>
+        <p style="font-size:0.9rem;">For large organizations with specific needs</p>
+        <ul class="pricing-features">
+          <li>Unlimited everything</li>
+          <li>Self-hosted option</li>
+          <li>Dedicated support</li>
+          <li>Custom integrations</li>
+          <li>SLA guarantee</li>
+        </ul>
+        <a href="#" class="btn btn-ghost" style="width:100%;justify-content:center;">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <h2>Ready to automate<br><span style="background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">your entire business?</span></h2>
+    <p>Join 2,847 teams already saving 40+ hours per week with AI-powered automation.</p>
+    <a href="#" class="btn btn-primary" style="font-size:1.1rem;padding:16px 40px;">Start Free Trial →</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>© 2026 NeuraSaaS — Template by <a href="https://github.com/DILOmcfly" style="color:var(--accent);text-decoration:none;">Diego F.</a> | Powered by Aura ✦</p>
+  </div>
+</footer>
+
+</body>
+</html>
